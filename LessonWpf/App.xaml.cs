@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using LessonWpf.Service.Logging;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -18,6 +20,22 @@ namespace LessonWpf
         {
             IServiceCollection services = new ServiceCollection();
             services.AddTransient<MainWindow, MainWindow>();
+            #region ConfigLogger
+            string LogPath = "logger.txt";
+            var loggerFactory = LoggerFactory.Create(builder =>
+            {
+                builder
+                    .AddFilter("Microsoft", LogLevel.Warning)
+                    .AddFilter("System", LogLevel.Warning)
+                    .AddFilter("WpfApp1", LogLevel.Debug)
+                    .AddProvider(new FileLoggerProvider(LogPath))
+                ;
+            });
+            ILogger logger = loggerFactory.CreateLogger<App>();
+
+            services.AddSingleton<ILogger>(logger);
+            #endregion
+
 
             var provider = services.BuildServiceProvider();
             MainWindow mainWindow = provider.GetService<MainWindow>();
