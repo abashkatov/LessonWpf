@@ -48,6 +48,22 @@ namespace LessonWpf
             services.AddSingleton<IConfiguration>(config);
             #endregion
 
+            #region 
+            string
+                host = config.GetValue<string>("host"),
+                dbname = config.GetValue<string>("dbname"),
+                dbuser = config.GetValue<string>("dbuser"),
+                dbpass = config.GetValue<string>("dbpass"),
+                Dsn =
+                    $"Server={host};" +
+                    $"Database={dbname};" +
+                    $"User={dbuser};" +
+                    $"Password={dbpass};";
+            var AppContext = new Service.Context.AppContext(Dsn);
+            services.AddSingleton< Service.Context.AppContext> (AppContext);
+            //var phones = AppContext.phones.ToList();
+            #endregion
+
             var provider = services.BuildServiceProvider();
             MainWindow mainWindow = provider.GetService<MainWindow>();
 
