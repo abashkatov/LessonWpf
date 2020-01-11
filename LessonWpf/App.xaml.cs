@@ -10,6 +10,9 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using LessonWpf.Service;
+using LessonWpf.Service.Net;
+using LessonWpf.Repository;
 
 namespace LessonWpf
 {
@@ -22,6 +25,11 @@ namespace LessonWpf
         {
             IServiceCollection services = new ServiceCollection();
             services.AddTransient<MainWindow, MainWindow>();
+            services.AddTransient<TelegramClient, TelegramClient>();
+            services.AddTransient<Server, Server>();
+            services.AddTransient<ClientOut, ClientOut>();
+            services.AddTransient<MessageRepository, MessageRepository>();
+            
             #region ConfigLogger
             string LogPath = "logger.txt";
             var loggerFactory = LoggerFactory.Create(builder =>
@@ -48,7 +56,7 @@ namespace LessonWpf
             services.AddSingleton<IConfiguration>(config);
             #endregion
 
-            #region 
+            #region ConfigDB
             string
                 host = config.GetValue<string>("host"),
                 dbname = config.GetValue<string>("dbname"),
@@ -60,7 +68,7 @@ namespace LessonWpf
                     $"User={dbuser};" +
                     $"Password={dbpass};";
             var AppContext = new Service.Context.AppContext(Dsn);
-            services.AddSingleton< Service.Context.AppContext> (AppContext);
+            services.AddSingleton<Service.Context.AppContext>(AppContext);
             //var phones = AppContext.phones.ToList();
             #endregion
 

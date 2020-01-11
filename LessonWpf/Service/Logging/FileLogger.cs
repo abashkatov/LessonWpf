@@ -39,7 +39,7 @@ namespace LessonWpf.Service.Logging
                 lock (_lock)
                 {
                     File.AppendAllText(
-                        filePath,
+                        $"{logLevel.ToString()}.{filePath}",
                         formatter(state, exception) + Environment.NewLine
                     );
                 }

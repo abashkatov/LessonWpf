@@ -1,4 +1,8 @@
-﻿using System;
+﻿using LessonWpf.Service;
+using LessonWpf.Service.Net;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +24,33 @@ namespace LessonWpf
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(
+            TelegramClient telegramClient, 
+            ILogger logger,
+            Server server,
+            ClientOut clientOut
+            )
         {
             InitializeComponent();
+            Logger = logger;
+            Server = server;
+            ClientOut = clientOut;
+            TelegramClient = telegramClient;
+
+            Logger.LogInformation("Старт приложения");
+            Server.Start();
+            ClientOut.SendMessage("127.0.0.1", "Test");
+            //TelegramClient.SendMessageAsync("@asbashkatov", "Hello!");
+        }
+
+        private TelegramClient TelegramClient { get; }
+        private ILogger Logger { get; }
+        private Server Server { get; }
+        private ClientOut ClientOut { get; }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Server.IsRunning = false;
         }
     }
 }
