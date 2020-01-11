@@ -1,7 +1,9 @@
 ﻿using LessonWpf.Service.Logging;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -36,6 +38,15 @@ namespace LessonWpf
             services.AddSingleton<ILogger>(logger);
             #endregion
 
+            #region ConfigFileConfig
+            string ConfigPath = "config.ini";
+            if (!File.Exists(ConfigPath)) {
+                using (File.Create(ConfigPath)) { }
+            }
+            var configBuilder = new ConfigurationBuilder().AddIniFile(ConfigPath);
+            IConfiguration config = configBuilder.Build();
+            services.AddSingleton<IConfiguration>(config);
+            #endregion
 
             var provider = services.BuildServiceProvider();
             MainWindow mainWindow = provider.GetService<MainWindow>();
