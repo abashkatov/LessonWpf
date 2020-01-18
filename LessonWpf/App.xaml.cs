@@ -10,6 +10,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using LessonWpf.Service.Client;
 
 namespace LessonWpf
 {
@@ -22,6 +23,7 @@ namespace LessonWpf
         {
             IServiceCollection services = new ServiceCollection();
             services.AddTransient<MainWindow, MainWindow>();
+            services.AddTransient<Telegram, Telegram>();
             #region ConfigLogger
             string LogPath = "logger.txt";
             var loggerFactory = LoggerFactory.Create(builder =>
@@ -30,7 +32,7 @@ namespace LessonWpf
                     .AddFilter("Microsoft", LogLevel.Warning)
                     .AddFilter("System", LogLevel.Warning)
                     .AddFilter("WpfApp1", LogLevel.Debug)
-                    .AddProvider(new FileLoggerProvider(LogPath))
+                    .AddProvider(new TelegramLoggerProvider(LogPath))
                 ;
             });
             ILogger logger = loggerFactory.CreateLogger<App>();

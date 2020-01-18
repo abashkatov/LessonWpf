@@ -158,9 +158,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Entity\Phone.cs" />
+    <Compile Include="Service\Client\Telegram.cs" />
     <Compile Include="Service\Context\AppContext.cs" />
+    <Compile Include="Service\Logging\TelegramLogger.cs" />
     <Compile Include="Service\Logging\FileLogger.cs" />
+    <Compile Include="Service\Logging\TelegramLoggerProvider.cs" />
     <Compile Include="Service\Logging\FileLoggerProvider.cs" />
+    <Compile Include="Service\TestableService.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

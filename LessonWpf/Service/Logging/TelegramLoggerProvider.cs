@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace LessonWpf.Service.Logging
 {
-    class TelegramLoggerProvider : ILoggerProvider
+    class FileLoggerProvider : ILoggerProvider
     {
         private string path;
-        public TelegramLoggerProvider(string _path)
+        public FileLoggerProvider(string _path)
         {
             path = _path;
         }
