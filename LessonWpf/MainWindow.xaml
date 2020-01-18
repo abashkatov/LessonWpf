@@ -8,10 +8,15 @@
         Title="MainWindow" Height="450" Width="800" Closing="Window_Closing">
     <Grid>
         <DockPanel>
-            <ListView DockPanel.Dock="Top">
+            <ListView DockPanel.Dock="Top" ItemsSource="{Binding Messages}">
                 <ListView.View>
                     <GridView>
-                        <!--<GridViewColumn-->
+                        <GridViewColumn 
+                            DisplayMemberBinding="{Binding Path=Author}">Автор</GridViewColumn>
+                        <GridViewColumn
+                            DisplayMemberBinding="{Binding Path=Createdon}">Дата создания</GridViewColumn>
+                        <GridViewColumn
+                            DisplayMemberBinding="{Binding Path=Text}">Сообщение</GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>

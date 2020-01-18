@@ -1,6 +1,7 @@
 ﻿using LessonWpf.Entity;
 using LessonWpf.Service;
 using LessonWpf.Service.Net;
+using LessonWpf.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
@@ -42,7 +43,13 @@ namespace LessonWpf
             Logger.LogInformation("Старт приложения");
 
             var Messages = new ObservableCollection<Message>();
+            Messages.Add(new Message("Text 1"));
+            Messages.Add(new Message("Text 2"));
+            Messages.Add(new Message("Text 3"));
 
+            var context = new MainWindowViewModel();
+            context.Messages = Messages;
+            DataContext = context;
 
             Server.Start();
             ClientOut.SendMessage("127.0.0.1", "Test");
