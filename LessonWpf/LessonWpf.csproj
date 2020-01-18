@@ -158,6 +158,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Command\DeleteMessage.cs" />
+    <Compile Include="Command\AddMessage.cs" />
     <Compile Include="Entity\Message.cs" />
     <Compile Include="Entity\Phone.cs" />
     <Compile Include="Repository\MessageRepository.cs" />

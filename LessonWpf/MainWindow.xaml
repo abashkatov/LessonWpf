@@ -8,7 +8,25 @@
         Title="MainWindow" Height="450" Width="800" Closing="Window_Closing">
     <Grid>
         <DockPanel>
-            <ListView DockPanel.Dock="Top" ItemsSource="{Binding Messages}">
+            <StackPanel 
+                DockPanel.Dock="Bottom" 
+                Orientation="Horizontal" 
+                FlowDirection="RightToLeft">
+                <Button Margin="10,10,10,10" Padding="10,5,10,5" 
+                        Command="{Binding DeleteMessageCommand}"
+                        CommandParameter="{Binding SelectedMessage}"
+                        >Удалить</Button>
+                <Button 
+                    Margin="10,10,10,10" Padding="10,5,10,5" 
+                    Command="{Binding AddMessageCommand}"
+                    >Добавить</Button>
+            </StackPanel>
+            <ListView 
+                x:Name="listView"
+                DockPanel.Dock="Top" 
+                ItemsSource="{Binding Messages}"
+                SelectedItem="{Binding SelectedMessage}"
+                >
                 <ListView.View>
                     <GridView>
                         <GridViewColumn 

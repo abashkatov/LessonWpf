@@ -42,12 +42,12 @@ namespace LessonWpf
 
             Logger.LogInformation("Старт приложения");
 
-            var Messages = new ObservableCollection<Message>();
+            Messages = new ObservableCollection<Message>();
             Messages.Add(new Message("Text 1"));
             Messages.Add(new Message("Text 2"));
             Messages.Add(new Message("Text 3"));
 
-            var context = new MainWindowViewModel();
+            var context = new MainWindowViewModel(Messages);
             context.Messages = Messages;
             DataContext = context;
 
@@ -56,6 +56,7 @@ namespace LessonWpf
             //TelegramClient.SendMessageAsync("@asbashkatov", "Hello!");
         }
 
+        private ObservableCollection<Message> Messages;
         private TelegramClient TelegramClient { get; }
         private ILogger Logger { get; }
         private Server Server { get; }
@@ -64,6 +65,19 @@ namespace LessonWpf
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Server.IsRunning = false;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Messages.Add(new Message("По кнопке"));
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (null != (DataContext as MainWindowViewModel).SelectedMessage)
+            {
+                Messages.Remove((DataContext as MainWindowViewModel).SelectedMessage);
+            }
         }
     }
 }
