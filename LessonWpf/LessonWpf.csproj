@@ -169,6 +169,7 @@
     <Compile Include="Service\Net\ClientIn.cs" />
     <Compile Include="Service\Net\ClientOut.cs" />
     <Compile Include="Service\Net\Server.cs" />
+    <Compile Include="Service\Summer.cs" />
     <Compile Include="Service\TelegramClient.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Page Include="MainWindow.xaml">

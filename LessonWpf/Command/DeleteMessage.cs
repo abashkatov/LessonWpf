@@ -20,7 +20,7 @@ namespace LessonWpf.Command
 
         public bool CanExecute(object parameter)
         {
-            return parameter is Message;
+            return true;
         }
 
         public void Execute(object parameter)
