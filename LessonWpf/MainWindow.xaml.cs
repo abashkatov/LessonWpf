@@ -1,9 +1,11 @@
-﻿using LessonWpf.Service;
+﻿using LessonWpf.Entity;
+using LessonWpf.Service;
 using LessonWpf.Service.Net;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,6 +40,10 @@ namespace LessonWpf
             TelegramClient = telegramClient;
 
             Logger.LogInformation("Старт приложения");
+
+            var Messages = new ObservableCollection<Message>();
+
+
             Server.Start();
             ClientOut.SendMessage("127.0.0.1", "Test");
             //TelegramClient.SendMessageAsync("@asbashkatov", "Hello!");

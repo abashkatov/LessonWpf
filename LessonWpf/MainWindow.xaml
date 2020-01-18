@@ -7,6 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Closing="Window_Closing">
     <Grid>
-        
+        <DockPanel>
+            <ListView DockPanel.Dock="Top">
+                <ListView.View>
+                    <GridView>
+                        <!--<GridViewColumn-->
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </DockPanel>
     </Grid>
 </Window>
