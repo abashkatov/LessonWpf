@@ -15,10 +15,14 @@ namespace LessonWpf.Service
         public TelegramClient(ILogger logger, IConfiguration config) {
             Logger = logger;
             BotToken = config.GetValue<string>("bot_token");
+
+            var handler = new HttpClientHandler();
+            Client = new HttpClient(handler);
         }
 
         private ILogger Logger { get; }
         private String BotToken { get; }
+        private HttpClient Client { get; set; }
 
         public async Task SendMessageAsync(string ChatId, string Message)
         {
@@ -26,13 +30,11 @@ namespace LessonWpf.Service
                 + $"?chat_id={ChatId}&text={Message}"
             ;
             Logger.LogInformation("Попытка отправить данные в телегу");
-            using (HttpClient client = new HttpClient())
-            {
-                client.Timeout = new TimeSpan(5);
-                var response = await client.GetAsync(url);
-                
-                Logger.LogInformation(response.StatusCode.ToString());
-            }
+                Client.Timeout = TimeSpan.FromSeconds(10);
+            var response = await Client.GetAsync(url);
+            //var response = await Client.GetAsync("https://ya.ru");
+
+            Logger.LogInformation(response.StatusCode.ToString());
         }
         private string GetUrl(string Method)
         {

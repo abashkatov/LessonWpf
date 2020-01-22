@@ -53,7 +53,8 @@ namespace LessonWpf
 
             Server.Start();
             ClientOut.SendMessage("127.0.0.1", "Test");
-            //TelegramClient.SendMessageAsync("@asbashkatov", "Hello!");
+            //TODO Вместо <channel_id> вставить id-канала
+            TelegramClient.SendMessageAsync("<channel_id>", "Hello!");
         }
 
         private ObservableCollection<Message> Messages;
